@@ -42,4 +42,3 @@ resource "cloudflare_record" "terraform_managed_resource_5a248a7c905f5149ef9cfea
   value   = "google-site-verification=2zTBaDkQXfK7mqxVurwaKt8gflX1VBdl4-XsDqRI5vE"
   zone_id = var.zone_id 
 }
-
