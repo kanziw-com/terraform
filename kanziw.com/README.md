@@ -1,6 +1,6 @@
 # kanziw.com
 
-## Initizlie
+## Initialize
 
 ```zsh
 $ terraform init
@@ -32,7 +32,7 @@ $ cf-terraforming generate \
 ```
 
 
-Import Terraform state into local
+Import terraform state into local
 
 ```zsh
 cf-terraforming import \
