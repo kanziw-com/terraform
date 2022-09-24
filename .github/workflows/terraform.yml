@@ -86,6 +86,9 @@ jobs:
 
             // 3. If we have a comment, delete it.
             if (botComment) {
+              if (botComment.body === output) {
+                return
+              }
               await github.rest.issues.deleteComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
