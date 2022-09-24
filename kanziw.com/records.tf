@@ -9,7 +9,7 @@ resource "cloudflare_record" "terraform_managed_resource_430849162e814a764b9ab76
 
 resource "cloudflare_record" "terraform_managed_resource_89ee5a8b736235257c7e21f5476057ef" {
   name    = "doha"
-  proxied = false
+  proxied = true
   ttl     = 1
   type    = "A"
   value   = "151.101.65.195"
