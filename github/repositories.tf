@@ -10,7 +10,7 @@ resource "github_repository" "terraform" {
   allow_squash_merge     = true
   delete_branch_on_merge = true
 
-  has_downloads             = true
+  has_downloads        = true
   has_issues           = true
   has_projects         = false
   has_wiki             = false
