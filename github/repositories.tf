@@ -1,7 +1,7 @@
 resource "github_repository" "terraform" {
   name       = "terraform"
   visibility = "public"
-  topics     = []
+  topics     = ["iac", "terraform"]
   archived   = false
 
   allow_auto_merge       = false
@@ -14,5 +14,5 @@ resource "github_repository" "terraform" {
   has_issues           = true
   has_projects         = false
   has_wiki             = false
-  vulnerability_alerts = false
+  vulnerability_alerts = true
 }
