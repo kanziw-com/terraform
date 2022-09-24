@@ -32,13 +32,13 @@ $ cf-terraforming generate \
 ```
 
 
-Import terraform state into local
+Import terraform state
 
 ```zsh
 cf-terraforming import \
   --resource-type cloudflare_record \
   --token $CLOUDFLARE_API_TOKEN \
-  --zone $TF_VAR_zone_id
+  --zone $TF_VAR_zone_id | zsh
 ```
 
 
