@@ -1,4 +1,11 @@
 terraform {
+  cloud {
+    organization = "kanziw"
+
+    workspaces {
+      name = "kanziw-com"
+    }
+  }
   required_providers {
     cloudflare = {
       source = "cloudflare/cloudflare"
