@@ -60,7 +60,7 @@ jobs:
             })
 
             // 2. Prepare format of the comment
-            const output = `## Workspace: \`${{ matrix.workspace }}\ `${shouldApply ? '🚀 \`WILL BE APPLIED\`' : '👀 no changed'}
+            const output = `## Workspace: \`${{ matrix.workspace }}\` ${shouldApply ? '🚀 \`WILL BE APPLIED\`' : '👀 no changed'}
             #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
             #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
