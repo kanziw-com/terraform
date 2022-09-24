@@ -7,4 +7,10 @@ terraform {
   }
 }
 
-provider "cloudflare" {}
+provider "cloudflare" {
+  # token pulled from $CLOUDFLARE_API_TOKEN
+}
+
+variable "zone_id" {
+  type = string
+}
