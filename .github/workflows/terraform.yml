@@ -47,6 +47,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const shouldApply = !(process.env.PLAN ?? '').includes('No changes. Your infrastructure matches the configuration.')
+
             // 1. Retrieve existing bot comments for the PR
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -58,7 +60,7 @@ jobs:
             })
 
             // 2. Prepare format of the comment
-            const output = `## Workspace: \`${{ matrix.workspace }}\`
+            const output = `## Workspace: \`${{ matrix.workspace }}\` ${shouldApply ? '🚀 \`WILL BE APPLIED\`' : '👀 no changed'}
             #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
             #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
@@ -82,20 +84,31 @@ jobs:
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ matrix.workspace }}\`, Workflow: \`${{ github.workflow }}\`*`;
 
-            // 3. If we have a comment, update it, otherwise create a new one
+            // 3. If we have a comment, delete it.
             if (botComment) {
-              github.rest.issues.updateComment({
+              if (botComment.body === output) {
+                return
+              }
+              await github.rest.issues.deleteComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 comment_id: botComment.id,
-                body: output
               })
-            } else {
+            }
+
+            // 4. Create a new comment if failure outcome exist of should be applied
+            const isFailureOutcomeExist = [
+              '${{ steps.fmt.outcome }}',
+              '${{ steps.init.outcome }}',
+              '${{ steps.validate.outcome }}',
+              '${{ steps.plan.outcome }}',
+            ].some(outcome => outcome === 'failure')
+            if (shouldApply || isFailureOutcomeExist) {
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: output
+                body: output,
               })
             }
 
