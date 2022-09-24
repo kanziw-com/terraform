@@ -8,7 +8,7 @@ $ terraform init
 
 ## Import GitHub resources
 
-Import terraform state into local
+Import terraform state
 
 ```zsh
 # terraform import github_repository.REPO_NAME REPO_NAME
@@ -27,9 +27,11 @@ Check sync
 
 ```zsh
 $ terraform plan
-github_repository.terraform: Refreshing state... [id=terraform]
+Running plan in Terraform Cloud. Output will stream here. Pressing Ctrl-C
+...
 
 No changes. Your infrastructure matches the configuration.
 
-Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
 ```
