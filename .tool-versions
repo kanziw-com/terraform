@@ -1,1 +1,3 @@
 terraform 1.3.0
+kubectl 1.25.2
+kustomize 4.5.7
