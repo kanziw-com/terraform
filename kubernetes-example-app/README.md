@@ -9,14 +9,6 @@
 ## Deploy
 
 ```zsh
-# ignore validating webhook on ingress creation 🤔
-# https://github.com/kubernetes/ingress-nginx/issues/8216#issuecomment-1118442022
-$ kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
-
-# Use real load balancer hostname
-$ export LOAD_BALANCER_HOSTNAME=$(kubectl get service/ingress-nginx-controller -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-$ sed -i '' "s/YOUR_LB_HOSTNAME/$LOAD_BALANCER_HOSTNAME/g" ingress.yml
-
 # preview yml
 $ kustomize build .
 $ kubectl apply -k .
@@ -46,10 +38,10 @@ $ open http://localhost:8080/
 ```
 
 
-in LoadBalancer
+in Domain
 
 ```zsh
-$ open http://$LOAD_BALANCER_HOSTNAME
+$ open https://eks-test.kanziw.com/
 ```
 
 
