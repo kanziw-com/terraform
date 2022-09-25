@@ -22,7 +22,7 @@ $ export KUBECONFIG=$KUBECONFIG:~/.kube/kanziw-com-eks
 Check
 
 ```zsh
-$ k get svc 
+$ kubectl get svc 
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   172.20.0.1   <none>        443/TCP   156m
 ```
@@ -33,8 +33,16 @@ kubernetes   ClusterIP   172.20.0.1   <none>        443/TCP   156m
 > execute `env | grep AWS` and unset `AWS_*` envs from your shell.
 
 
+## Install Nginx ingress contoller
+
+```zsh
+# https://kubernetes.github.io/ingress-nginx/deploy/#aws
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.1/deploy/static/provider/aws/deploy.yaml
+```
+
 ## Destroy
 
 ```zsh
+$ kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.1/deploy/static/provider/aws/deploy.yaml
 $ terraform destroy
 ```
